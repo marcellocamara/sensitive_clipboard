@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - sensitive_clipboard (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - sensitive_clipboard (from `.symlinks/plugins/sensitive_clipboard/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  sensitive_clipboard:
+    :path: ".symlinks/plugins/sensitive_clipboard/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  sensitive_clipboard: d4866e5d176581536c27bb1618642ee83adca986
+
+PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+
+COCOAPODS: 1.11.3

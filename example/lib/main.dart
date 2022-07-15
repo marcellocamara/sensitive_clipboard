@@ -1,35 +1,47 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sensitive_clipboard/sensitive_clipboard.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MaterialApp(
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
+  String _text = 'Lorem Ipsum';
+  bool _hideText = false;
+  bool _loading = false;
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
+  Future<void> copyToClipboard() async {
+    // Closes keyboard if its opened
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    setState(() => _loading = true);
+
+    bool dataWasHiddenForAndroidAPI33;
+    String text;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await SensitiveClipboard.platformVersion;
+      dataWasHiddenForAndroidAPI33 = await SensitiveClipboard.copy(
+        _text,
+        hideContent: _hideText,
+      );
+      text = 'Success copied into the Clipboard!\n'
+          'But not hidden because it is not Android API 33';
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      text = 'Ops! Something is wrong.';
+      dataWasHiddenForAndroidAPI33 = false;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -37,20 +49,78 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    if (!dataWasHiddenForAndroidAPI33) {
+      // Shows snack bar into versions that are not the specific android version
+      // The clipboard modal appears only on Android API 33+
+      // You should not show dialog if is this version to avoid duplicated dialogs
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(text),
+        ),
+      );
+    }
+
+    setState(() => _loading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Sensitive Clipboard\nexample app',
+          textAlign: TextAlign.center,
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Checkbox(
+                  value: _hideText,
+                  onChanged: (newValue) {
+                    setState(() => _hideText = newValue!);
+                  },
+                ),
+                const Text('Hide content'),
+                const SizedBox(width: 24),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: SizedBox(
+                width: 150,
+                child: TextFormField(
+                  initialValue: _text,
+                  textAlign: TextAlign.center,
+                  onChanged: (String newText) {
+                    setState(() => _text = newText);
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 135,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: _loading ? null : copyToClipboard,
+                child: const Text('Copy'),
+              ),
+            ),
+            const SizedBox(height: 18),
+            const Text(
+              'Click to copy the text\n'
+              'from the TextField\n\n'
+              'Data will be hidden if\n'
+              'checkbox is checked',
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );

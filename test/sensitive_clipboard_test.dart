@@ -9,7 +9,7 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      return methodCall.arguments['hideContent'];
     });
   });
 
@@ -17,7 +17,12 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await SensitiveClipboard.platformVersion, '42');
+  test('copyText', () async {
+    expect(await SensitiveClipboard.copy(null), true);
+    expect(await SensitiveClipboard.copy(null, hideContent: false), false);
+    expect(await SensitiveClipboard.copy(''), true);
+    expect(await SensitiveClipboard.copy('', hideContent: false), false);
+    expect(await SensitiveClipboard.copy('123456'), true);
+    expect(await SensitiveClipboard.copy('123456', hideContent: false), false);
   });
 }

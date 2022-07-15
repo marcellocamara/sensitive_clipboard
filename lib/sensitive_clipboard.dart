@@ -1,14 +1,27 @@
-
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class SensitiveClipboard {
+  SensitiveClipboard._();
+
   static const MethodChannel _channel =
       const MethodChannel('sensitive_clipboard');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  /// Returns true only if sensitive content has been hidden - for Android API 33+
+  static Future<bool> copy(String? text, {bool hideContent = true}) async {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      // Sensitive clipboard
+      final copyResult = await _channel.invokeMethod<bool>(
+        'copyText',
+        {'text': text, 'hideContent': hideContent},
+      );
+      return Future.value(copyResult);
+    } else {
+      // Flutter default clipboard
+      await Clipboard.setData(ClipboardData(text: text));
+      return Future.value(false);
+    }
   }
 }
