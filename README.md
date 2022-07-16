@@ -6,7 +6,7 @@ For more information about it, read the original [documentation](https://develop
 
 ## Example
 
-![example-gif](/Users/cello/Desktop/sensitive_clipboard/example/assets/example.gif)
+![example-gif](https://raw.githubusercontent.com/marcellocamara/sensitive_clipboard/master/example/assets/example.gif)
 
 ## Getting Started
 
