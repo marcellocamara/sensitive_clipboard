@@ -1,7 +1,6 @@
 name: sensitive_clipboard
 description: Sensitive clipboard that wraps the original flutter clipboard
 version: 0.0.1
-author: https://marcello.dev
 homepage: https://github.com/marcellocamara/sensitive_clipboard
 
 environment:

@@ -1,6 +1,6 @@
 # sensitive_clipboard
 
-A clipboard plugin that allows to copy sensitive content to clipboard using the new param sensitive into the Android 13 (API 33).
+A clipboard plugin that allows copy sensitive content to clipboard using the new param sensitive into the Android 13 (API 33).
 
 For more information about it, read the original [documentation](https://developer.android.com/about/versions/13/features/copy-paste#sensitive-content).
 
@@ -10,7 +10,7 @@ For more information about it, read the original [documentation](https://develop
 
 ## Getting Started
 
-This project is a anticipated plugin to avoid sensitive data be shown on Android 13, until Flutter's official package allows to do the same.
+This project is an anticipated plugin to avoid sensitive data be shown on Android 13, until Flutter's official package allows to do the same.
 
 This works with Android and iOS. The main objective is to wrap the original clipboard, allowing to hide sensitive content only for Android 13. If the default platform is iOS, the original clipboard from Flutter will be called.
 
