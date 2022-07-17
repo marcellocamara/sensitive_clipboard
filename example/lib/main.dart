@@ -37,10 +37,10 @@ class _MyAppState extends State<MyApp> {
         _text,
         hideContent: _hideText,
       );
-      text = 'Success copied into the Clipboard!\n'
-          'But not hidden because it is not Android API 33';
+      text = 'Successfully copied to Clipboard!\n'
+          'But not hidden because it\'s not Android API 33';
     } on PlatformException {
-      text = 'Ops! Something is wrong.';
+      text = 'Ops! Something went wrong.';
       dataWasHiddenForAndroidAPI33 = false;
     }
 
