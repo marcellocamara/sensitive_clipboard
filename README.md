@@ -43,7 +43,10 @@ import 'package:sensitive_clipboard/sensitive_clipboard.dart';
 SensitiveClipboard.copy('Sensitive-Content');
 ```
 
-#### 5) Before you run, config the android/app/build.gradle
+#### 5) Run
+Only for Android development:
+
+Before you run, config your android/app/build.gradle file
 ```gradle
 android {
     compileSdkVersion 33

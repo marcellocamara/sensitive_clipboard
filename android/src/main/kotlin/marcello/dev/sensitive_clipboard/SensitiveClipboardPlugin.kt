@@ -26,7 +26,7 @@ class SensitiveClipboardPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-        if (call.method == "copyText") {
+        if (call.method == "copy") {
 
             val text = call.argument("text") ?: ""
             val shouldHide = call.argument("hideContent") ?: false
@@ -34,7 +34,7 @@ class SensitiveClipboardPlugin : FlutterPlugin, MethodCallHandler {
             val clipBoardManager = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             val clipData = ClipData.newPlainText("text", text)
 
-            var isAboveAndroidAPI33 = false
+            var isAboveOrEqualsAPI33 = false
 
             clipData.apply {
                 // The doc says that all apps should do this, regardless of the targeted API level
@@ -42,7 +42,7 @@ class SensitiveClipboardPlugin : FlutterPlugin, MethodCallHandler {
                 // See the doc here https://developer.android.com/about/versions/13/behavior-changes-all#copy-sensitive-content
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (Build.VERSION.SDK_INT >= 33) {
-                        isAboveAndroidAPI33 = true
+                        isAboveOrEqualsAPI33 = true
                         description.extras = PersistableBundle().apply {
                             putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, shouldHide)
                         }
@@ -56,7 +56,7 @@ class SensitiveClipboardPlugin : FlutterPlugin, MethodCallHandler {
 
             clipBoardManager.setPrimaryClip(clipData)
 
-            result.success(isAboveAndroidAPI33)
+            result.success(isAboveOrEqualsAPI33)
         } else {
             result.notImplemented()
         }

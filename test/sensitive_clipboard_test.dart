@@ -17,12 +17,16 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('copyText', () async {
+  test('copy', () async {
     expect(await SensitiveClipboard.copy(null), true);
     expect(await SensitiveClipboard.copy(null, hideContent: false), false);
     expect(await SensitiveClipboard.copy(''), true);
     expect(await SensitiveClipboard.copy('', hideContent: false), false);
     expect(await SensitiveClipboard.copy('123456'), true);
     expect(await SensitiveClipboard.copy('123456', hideContent: false), false);
+  });
+
+  test('paste', () async {
+    expect(await SensitiveClipboard.paste(), '');
   });
 }
