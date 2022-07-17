@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Updated kotlin version
+
 ## 0.0.2
 
 * Allows to paste text from clipboard
