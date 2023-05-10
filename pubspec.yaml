@@ -1,6 +1,6 @@
 name: sensitive_clipboard
 description: Flutter plugin that wraps the original flutter clipboard and allows hide sensitive content
-version: 0.0.3
+version: 1.0.0
 homepage: https://github.com/marcellocamara/sensitive_clipboard
 
 environment:

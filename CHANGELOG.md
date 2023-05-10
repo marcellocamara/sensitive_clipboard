@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Linter fix and stable, functional, version
+
 ## 0.0.3
 
 * Updated kotlin version
