@@ -21,7 +21,7 @@ class SensitiveClipboard {
       return Future.value(copyResult);
     } else {
       // Flutter's default clipboard
-      await Clipboard.setData(ClipboardData(text: text));
+      await Clipboard.setData(ClipboardData(text: text ?? ''));
       return Future.value(false);
     }
   }
