@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Updates native example projects and gradle version to build on new versions
+
 ## 1.0.0
 
 * Linter fix and stable, functional, version
