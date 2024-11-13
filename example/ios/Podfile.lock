@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sensitive_clipboard/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   sensitive_clipboard: d4866e5d176581536c27bb1618642ee83adca986
 
-PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
