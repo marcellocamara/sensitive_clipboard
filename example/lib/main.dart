@@ -5,14 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:sensitive_clipboard/sensitive_clipboard.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: MyApp(),
-    ),
-  );
+  runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -37,7 +35,8 @@ class _MyAppState extends State<MyApp> {
         _text,
         hideContent: _hideText,
       );
-      text = 'Successfully copied to Clipboard!\n'
+      text =
+          'Successfully copied to Clipboard!\n'
           'But not hidden because it\'s not Android API 33';
     } on PlatformException {
       text = 'Ops! Something went wrong.';
@@ -54,11 +53,7 @@ class _MyAppState extends State<MyApp> {
       // The clipboard modal appears only on Android API 33+
       // You should not show dialog if is this version to avoid duplicated dialogs
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(text),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
     }
 
     setState(() => _loading = false);

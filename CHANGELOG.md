@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Updates requirements to Dart 3.10 and Flutter 3.38.1
+
 ## 1.1.0
 
 * Updates native example projects and gradle version to build on new versions
